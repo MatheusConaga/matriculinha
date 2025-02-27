@@ -11,7 +11,7 @@ export const style = StyleSheet.create({
         alignItems: "center",
         justifyContent: "space-evenly",
         borderRadius: 10,
-        marginBottom: 10,
+        marginTop: 15,
         paddingLeft: 5,
         paddingRight: 5,
         alignSelf: "center",

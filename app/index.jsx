@@ -11,7 +11,7 @@ export default function Main() {
 
     useEffect(() => {
         if (isReady) {
-            router.replace("/screens/home");
+            router.replace("/screens/login");
         }
     }, [isReady, router]);
 
