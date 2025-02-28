@@ -2,6 +2,15 @@ import { StyleSheet } from "react-native";
 import { Colors } from "../../../constants/Colors";
 
 export const style = StyleSheet.create({
+    deleteButton: {
+        backgroundColor: Colors.theme.title,
+        alignItems: "center",
+        padding: 30,
+        borderRadius: 10,
+        marginRight: 10,
+        height: 100,
+        alignSelf: "flex-end",
+    },
 
     container: {
         backgroundColor: Colors.theme.container,
