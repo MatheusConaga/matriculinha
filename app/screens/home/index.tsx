@@ -1,5 +1,6 @@
 import React from "react";
-import { Text, ScrollView } from "react-native";
+import { useRouter } from "expo-router";
+import { ScrollView } from "react-native";
 
 import AppBar from "../../components/AppBar";
 import AlunoItem from "../../components/AlunoItem";
@@ -8,12 +9,13 @@ import Botao from "../../components/Botao";
 import { style } from "./style";
 
 export default function Home() {
+    const router = useRouter();
 
     return (
         <>
-        <AppBar />
+            <AppBar />
             <ScrollView>
-                <Botao text="Adicionar aluno" func={() => alert("Adicionando aluno...")} />
+                <Botao text="Adicionar aluno" func={() => router.push("/screens/cadastroAlunos")} />
                 <AlunoItem />
                 <AlunoItem />
                 <AlunoItem />

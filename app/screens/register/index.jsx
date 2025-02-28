@@ -1,11 +1,10 @@
 import React from "react";
-import { ScrollView } from "react-native";
+import { ScrollView, View } from "react-native";
 import AppBar from "../../components/AppBar";
 import FormContainer from "../../components/FormContainer";
 import AuthLinks from "../../components/AuthLinks";
 
-
-export default function Login() {
+export default function Register() {
 
     return (
         <>
@@ -15,13 +14,14 @@ export default function Login() {
                 <FormContainer
                     titulo={"Bem-vindo ao delta escola"}
                     inputs={[
+                        { icon: "user-circle", placeholder: "Insira seu nome" },
                         { icon: "envelope", placeholder: "Insira seu email" },
                         { icon: "lock", placeholder: "Insira sua senha" },
                     ]}
-                    textButton={"Entrar"}
+                    textButton={"Criar Conta"}
                 />
             </ScrollView>
         </>
-    )
+    );
 
 }

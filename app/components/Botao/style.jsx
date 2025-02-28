@@ -8,8 +8,8 @@ export const style = StyleSheet.create({
         backgroundColor: Colors.theme.button,
         padding: 10,
         flexDirection: 'column',
-        borderRadius: 5,
-        width: '70%',
+        borderRadius: 10,
+        width: '80%',
     },
     button_text: {
         color: Colors.theme.button_text,

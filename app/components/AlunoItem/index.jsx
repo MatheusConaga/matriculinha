@@ -6,7 +6,7 @@ export default function AlunoItem (){
     return (
 
         <View style={style.container}>
-            <FontAwesome name="user-circle" size={60} color="black" />
+            <FontAwesome name="user-circle" size={50} color="black" />
             <Text>NOME ALUNO</Text>
             <Text>EMAIL@GMAIL.COM</Text>
         </View>
