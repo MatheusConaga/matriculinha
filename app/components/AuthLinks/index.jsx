@@ -20,9 +20,9 @@ export default function AuthLinks() {
 
     return (
         <View style={style.container}>
-            <Titulo titulo={"Login"} func={handleLogin} selected={isLogin} />
+            <Titulo titulo={"Entrar"} func={handleLogin} selected={isLogin} />
             <View style={{ width: 5, height: 30, backgroundColor: '#ccc', marginHorizontal: 10 }} />
-            <Titulo titulo={"Cadastro"} func={handleRegister} selected={isRegister} />
+            <Titulo titulo={"Cadastrar"} func={handleRegister} selected={isRegister} />
         </View>
     )
 

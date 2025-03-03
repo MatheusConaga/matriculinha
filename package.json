@@ -9,6 +9,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "axios": "^1.8.1",
     "expo": "~52.0.37",
     "expo-router": "^4.0.17",
     "expo-status-bar": "~2.0.1",
