@@ -1,26 +1,52 @@
-import React from "react";
-import { ScrollView,Alert } from "react-native";
+import React, { useState } from "react";
+import { useRouter } from "expo-router";
+import { ScrollView } from "react-native";
 import AppBar from "../../components/AppBar";
 import FormContainer from "../../components/FormContainer";
 import AuthLinks from "../../components/AuthLinks";
-import axios from "axios";
-import {server, showError, showSuccess} from "../../common";
 
+import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { server, showError, showSuccess } from "../../common";
 
 export default function Login() {
+    const router = useRouter();
+
+    const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("");
 
     const login = async () => {
+        const normalizedEmail = email.trim().toLowerCase();
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(normalizedEmail)) {
+            showError("Email inválido.");
+            return;
+        }
+        if (password.length < 6 || password.length > 50) {
+            showError("A senha deve ter entre 6 e 50 caracteres.");
+            return;
+        }
+
         try {
-            const res = await axios.get(`${server}/alunos`);
-            console.log(res.data); 
+            const res = await axios.post(`${server}/tokens/`, {
+                email: normalizedEmail,
+                password: password,
+            });
+
+            await AsyncStorage.setItem("userData", JSON.stringify(res.data));
+            axios.defaults.headers.common["Authorization"] = `bearer ${res.data.token}`;
+            router.replace({
+                pathname: "/screens/home",
+                params: res.data,
+            });
+
+            showSuccess("Entrou com sucesso!");
+            console.log(res.data);
         } catch (e) {
-            console.error(e); 
+            console.error(e);
+            showError("Erro ao fazer login.");
         }
     };
-
-    const retorne = () => {
-        console.log("TESTANDOOO");
-    }
 
     return (
         <>
@@ -28,16 +54,24 @@ export default function Login() {
             <AuthLinks />
             <ScrollView>
                 <FormContainer
-                    titulo={"Bem-vindo ao delta escola"}
+                    titulo={"Bem-vindo ao Delta Escola"}
                     inputs={[
-                        { icon: "envelope", placeholder: "Insira seu email" },
-                        { icon: "lock", placeholder: "Insira sua senha" },
+                        {
+                            icon: "envelope",
+                            placeholder: "Insira seu email",
+                            onChangeText: setEmail,
+                        },
+                        {
+                            icon: "lock",
+                            placeholder: "Insira sua senha",
+                            onChangeText: setPassword,
+                            secure: true, 
+                        },
                     ]}
-                    textButton={"Entrar"} 
+                    textButton={"Entrar"}
                     func={login}
                 />
             </ScrollView>
         </>
-    )
-
+    );
 }

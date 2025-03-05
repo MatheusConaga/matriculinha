@@ -1,5 +1,6 @@
 import { useRouter } from 'expo-router';
 import { useEffect, useState } from "react";
+import FlashMessage from "react-native-flash-message";
 
 export default function Main() {
     const router = useRouter();
@@ -15,5 +16,9 @@ export default function Main() {
         }
     }, [isReady, router]);
 
-    return null;
+    return (
+        <>
+            <FlashMessage position="top" />
+        </>
+    );
 }

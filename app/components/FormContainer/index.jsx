@@ -6,9 +6,7 @@ import Botao from "../Botao";
 import Titulo from "../Titulo";
 import FotoAluno from "../FotoAluno";
 
-
 export default function FormContainer({ titulo, textButton, inputs = [], func, showLogo = true }) {
-
     return (
         <View style={style.container}>
             {showLogo && <Image source={logo} style={style.logo} resizeMode="cover" />}
@@ -19,10 +17,11 @@ export default function FormContainer({ titulo, textButton, inputs = [], func, s
                     key={index}
                     icon={input.icon}
                     placeholder={input.placeholder}
+                    onChangeText={input.onChangeText}
+                    secure={input.secure}
                 />
             ))}
             <Botao text={textButton} func={func} />
         </View>
-    )
-
+    );
 }

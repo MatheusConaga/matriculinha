@@ -10,7 +10,7 @@ export default function CadastroAlunos() {
             <AppBar />
             <ScrollView>
                 <FormContainer
-                showLogo={false}
+                    showLogo={false}
                     titulo={"Cadastrar aluno"}
                     inputs={[
                         { icon: "user-circle", placeholder: "Insira o nome" },
