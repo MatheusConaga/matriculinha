@@ -25,6 +25,11 @@ export const style = StyleSheet.create({
         paddingRight: 5,
         alignSelf: "center",
 
-    }
+    },
+    foto: {
+        width: 50,
+        height: 50,
+        borderRadius: 25,
+    },
 
 });

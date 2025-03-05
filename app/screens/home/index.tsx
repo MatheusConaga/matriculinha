@@ -39,6 +39,7 @@ export default function Home() {
                 {alunos.map((aluno) => (
                     <AlunoItem
                         key={aluno.id}
+                        foto={aluno.Photos?.length > 0 ? aluno.Photos[0].url : null}
                         nome={aluno.nome}
                         email={aluno.email}
                     />
