@@ -4,7 +4,6 @@ import { Colors } from "../../../constants/Colors";
 export const style = StyleSheet.create({
 
     container: {
-        // backgroundColor: Colors.theme.title,
         padding: 10,
         alignSelf: 'center',
         flexDirection: 'column',
@@ -20,5 +19,11 @@ export const style = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
     },
+    foto: {
+        width: 90,
+        height: 90,
+        borderRadius: 50,
+    },
+
 
 })

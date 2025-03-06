@@ -8,7 +8,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { style } from "./style";
 
-export default function AlunoItem({ nome, email, foto }) {
+export default function AlunoItem({ id, foto, nome, email }) {
     const router = useRouter();
 
     const getRightContent = () => {
@@ -20,12 +20,13 @@ export default function AlunoItem({ nome, email, foto }) {
     }
 
     const editarAluno = () => {
-
         router.push({
             pathname: "/screens/cadastroAlunos",
-            params: { nome, email, foto }
-        })
-    }
+            params: { id },
+        });
+    };
+
+
 
     return (
         <GestureHandlerRootView>
@@ -35,13 +36,20 @@ export default function AlunoItem({ nome, email, foto }) {
 
                 <TouchableOpacity onLongPress={editarAluno}>
                     <View style={style.container}>
-                        {foto ? (
-                            <Image source={{uri: foto}} style={style.foto}/>
-                        ) : (
-                            <FontAwesome name="user-circle" size={50} color="black" />
-                        )}
-                        <Text>{nome}</Text>
-                        <Text>{email}</Text>
+                        <View>
+                            {foto ? (
+                                <Image source={{ uri: foto }} style={style.foto} />
+                            ) : (
+                                <FontAwesome name="user-circle" size={60} color="black" />
+                            )}
+                        </View>
+                        <View>
+                            <Text>{nome}</Text>
+                        </View>
+                        <View>
+                            <Text>{email}</Text>
+                        </View>
+
                     </View>
                 </TouchableOpacity>
             </Swipeable>

@@ -18,17 +18,16 @@ export const style = StyleSheet.create({
         height: 100,
         flexDirection: "row",
         alignItems: "center",
-        justifyContent: "space-evenly",
+        justifyContent: "space-between",
+        paddingLeft: 20,
+        paddingRight: 20,
         borderRadius: 10,
         marginTop: 15,
-        paddingLeft: 5,
-        paddingRight: 5,
         alignSelf: "center",
-
     },
     foto: {
-        width: 50,
-        height: 50,
+        width: 60,
+        height: 60,
         borderRadius: 25,
     },
 

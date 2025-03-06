@@ -1,21 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "expo-router";
 import { ScrollView } from "react-native";
-
 import AppBar from "../../components/AppBar";
 import AlunoItem from "../../components/AlunoItem";
 import Botao from "../../components/Botao";
-
 import axios from "axios";
-import { server, showError, showSuccess } from "../../common";
-
-// 
-
+import { server, showError } from "../../common";
 import { style } from "./style";
 
 export default function Home() {
     const router = useRouter();
-
     const [alunos, setAlunos] = useState([]);
 
     useEffect(() => {
@@ -39,6 +33,7 @@ export default function Home() {
                 {alunos.map((aluno) => (
                     <AlunoItem
                         key={aluno.id}
+                        id={aluno.id}
                         foto={aluno.Photos?.length > 0 ? aluno.Photos[0].url : null}
                         nome={aluno.nome}
                         email={aluno.email}
@@ -47,5 +42,4 @@ export default function Home() {
             </ScrollView>
         </>
     );
-
 }
