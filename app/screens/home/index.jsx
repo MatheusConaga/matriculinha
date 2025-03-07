@@ -34,9 +34,10 @@ export default function Home() {
                     <AlunoItem
                         key={aluno.id}
                         id={aluno.id}
-                        foto={aluno.Photos?.length > 0 ? aluno.Photos[0].url : null}
+                        foto={aluno.Photos?.[0]?.url ?? null}
                         nome={aluno.nome}
                         email={aluno.email}
+                        atualizarLista={carregarAlunos} // Passando a função para atualizar lista
                     />
                 ))}
             </ScrollView>

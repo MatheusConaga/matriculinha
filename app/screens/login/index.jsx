@@ -34,14 +34,12 @@ export default function Login() {
             });
 
             await AsyncStorage.setItem("userData", JSON.stringify(res.data));
-            axios.defaults.headers.common["Authorization"] = `bearer ${res.data.token}`;
+            axios.defaults.headers.common["Authorization"] = `Bearer ${res.data.token}`;
             router.replace({
                 pathname: "/screens/home",
                 params: res.data,
             });
-
             showSuccess("Entrou com sucesso!");
-            console.log(res.data);
         } catch (e) {
             console.error(e);
             showError("Erro ao fazer login.");
@@ -65,7 +63,7 @@ export default function Login() {
                             icon: "lock",
                             placeholder: "Insira sua senha",
                             onChangeText: setPassword,
-                            secure: true, 
+                            secure: true,
                         },
                     ]}
                     textButton={"Entrar"}

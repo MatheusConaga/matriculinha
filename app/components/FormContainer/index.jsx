@@ -6,12 +6,24 @@ import Botao from "../Botao";
 import Titulo from "../Titulo";
 import FotoAluno from "../FotoAluno";
 
-export default function FormContainer({ titulo, textButton, inputs = [], func, showLogo = true, foto }) {
+export default function FormContainer({
+    titulo,
+    textButton,
+    inputs = [],
+    func,
+    showLogo = true,
+    foto,
+    onChangeFoto,
+    alunoId
+}) {
     return (
         <View style={style.container}>
             {showLogo && <Image source={logo} style={style.logo} resizeMode="cover" />}
             <Titulo titulo={titulo} />
-            {showLogo == false && <FotoAluno button={true} foto={foto} />}
+            {showLogo === false && (
+                console.log("FormContainer - Foto recebida:", foto),
+                <FotoAluno button={true} foto={foto} onChangeFoto={onChangeFoto} alunoId={alunoId}/>
+            )}
             {inputs.map((input, index) => (
                 <InputContainer
                     key={index}

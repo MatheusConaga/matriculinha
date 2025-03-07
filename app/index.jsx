@@ -12,7 +12,7 @@ export default function Main() {
 
     useEffect(() => {
         if (isReady) {
-            router.replace("/screens/cadastroAlunos");
+            router.replace("/screens/home");
         }
     }, [isReady, router]);
 
