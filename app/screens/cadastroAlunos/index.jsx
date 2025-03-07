@@ -116,8 +116,8 @@ export default function CadastroAlunos() {
                             { icon: "user-circle", placeholder: "Sobrenome", value: sobrenome, onChangeText: setSobrenome },
                             { icon: "envelope", placeholder: "Email", value: email, onChangeText: setEmail },
                             { icon: "calendar", placeholder: "Idade", value: idade, onChangeText: setIdade, keyboardType: "numeric" },
-                            { icon: "ruler", placeholder: "Altura", value: altura, onChangeText: setAltura, keyboardType: "numeric" },
-                            { icon: "weight", placeholder: "Peso", value: peso, onChangeText: setPeso, keyboardType: "numeric" },
+                            { icon: "arrows-v", placeholder: "Altura", value: altura, onChangeText: setAltura, keyboardType: "numeric" },
+                            { icon: "balance-scale", placeholder: "Peso", value: peso, onChangeText: setPeso, keyboardType: "numeric" },
                         ]}
                         textButton={params.id ? "Editar Aluno" : "Cadastrar aluno"}
                         func={editaOrCadastro}
