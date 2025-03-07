@@ -20,6 +20,7 @@ export default function CadastroAlunos() {
     const [altura, setAltura] = useState("");
     const [peso, setPeso] = useState("");
     const [loading, setLoading] = useState(true);
+    const [token, setToken] = useState("");
 
     useEffect(() => {
         async function checkLogin() {
@@ -27,6 +28,8 @@ export default function CadastroAlunos() {
             if (!userData) {
                 router.replace("/screens/login");
             } else {
+                const parsed = JSON.parse(userData);
+                setToken(parsed.token);
                 setLoading(false);
             }
         }
@@ -37,7 +40,7 @@ export default function CadastroAlunos() {
         if (params.id) {
             axios
                 .get(`${server}/alunos/${params.id}`)
-                .then(response => {
+                .then((response) => {
                     const aluno = response.data;
                     console.log("Dados do aluno:", aluno);
 
@@ -52,54 +55,15 @@ export default function CadastroAlunos() {
                     console.log("URL da foto carregada:", fotoUrl);
                     setFoto(fotoUrl);
                 })
-                .catch(error => {
+                .catch((error) => {
                     showError("Erro ao carregar detalhes do aluno.");
                     console.error("Erro no GET do aluno:", error);
                 });
         }
     }, [params.id]);
 
-    const handleUploadImage = async (alunoId, token) => {
-        if (!foto || !foto.startsWith("file")) return;
-
-        try {
-            const filename = foto.split("/").pop();
-            const fileType = filename.split('.').pop().toLowerCase();
-
-            const formData = new FormData();
-            formData.append("photo", {
-                uri: foto,
-                name: filename,
-                type: `image/${fileType}`,
-            });
-            formData.append("aluno_id", alunoId.toString());
-
-            const photoConfig = {
-                headers: {
-                    "Authorization": `Bearer ${token}`,
-                    "Content-Type": "multipart/form-data",
-                }
-            };
-
-            console.log("Enviando foto com FormData:", formData);
-            const resPhoto = await axios.post(`${server}/photos/`, formData, photoConfig);
-            console.log("Foto enviada com sucesso:", resPhoto.data);
-
-            const updatedAluno = await axios.get(`${server}/alunos/${alunoId}`);
-            const novaFotoUrl = updatedAluno.data.Photos?.length > 0 ? updatedAluno.data.Photos[0].url : "";
-            setFoto(novaFotoUrl);
-        } catch (err) {
-            console.error("Erro ao enviar a foto:", err.response?.data || err.message);
-            showError("Erro ao enviar a foto.");
-        }
-    };
-
     const editaOrCadastro = async () => {
         try {
-            const userData = await AsyncStorage.getItem("userData");
-            const token = userData ? JSON.parse(userData).token : "";
-            console.log("URI da foto a ser enviada:", foto);
-
             const config = { headers: { "Authorization": `Bearer ${token}` } };
             const alunoData = {
                 nome: nome.trim(),
@@ -107,7 +71,7 @@ export default function CadastroAlunos() {
                 email: email.trim(),
                 idade: Number(idade.trim()),
                 altura: Number(altura.trim()),
-                peso: Number(peso.trim())
+                peso: Number(peso.trim()),
             };
             let alunoId = params.id;
 
@@ -121,9 +85,6 @@ export default function CadastroAlunos() {
                 console.log("Aluno cadastrado:", res.data);
             }
 
-            // Envia a foto somente se for uma imagem local
-            await handleUploadImage(alunoId, token);
-
             showSuccess(alunoId ? "Aluno atualizado com sucesso!" : "Aluno cadastrado com sucesso!");
             router.back();
         } catch (error) {
@@ -136,7 +97,6 @@ export default function CadastroAlunos() {
         setFoto(newUri);
         console.log("A NOVA FOTO É: ", newUri);
     };
-
 
     return (
         <>
@@ -166,6 +126,8 @@ export default function CadastroAlunos() {
                                 foto={foto}
                                 button={true}
                                 onChangeFoto={changeFoto}
+                                alunoId={params.id}
+                                token={token}
                             />
                         }
                     />

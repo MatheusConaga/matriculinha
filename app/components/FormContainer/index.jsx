@@ -4,7 +4,6 @@ import logo from "../../../assets/imgs/logo_delta.png";
 import InputContainer from "../InputContainer";
 import Botao from "../Botao";
 import Titulo from "../Titulo";
-import FotoAluno from "../FotoAluno";
 
 export default function FormContainer({
     titulo,
@@ -12,18 +11,13 @@ export default function FormContainer({
     inputs = [],
     func,
     showLogo = true,
-    foto,
-    onChangeFoto,
-    alunoId
+    fotoComponent
 }) {
     return (
         <View style={style.container}>
             {showLogo && <Image source={logo} style={style.logo} resizeMode="cover" />}
             <Titulo titulo={titulo} />
-            {showLogo === false && (
-                console.log("FormContainer - Foto recebida:", foto),
-                <FotoAluno button={true} foto={foto} onChangeFoto={onChangeFoto} alunoId={alunoId}/>
-            )}
+            {!showLogo && fotoComponent}
             {inputs.map((input, index) => (
                 <InputContainer
                     key={index}

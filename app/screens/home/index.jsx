@@ -37,7 +37,7 @@ export default function Home() {
                         foto={aluno.Photos?.[0]?.url ?? null}
                         nome={aluno.nome}
                         email={aluno.email}
-                        atualizarLista={carregarAlunos} // Passando a função para atualizar lista
+                        atualizarLista={carregarAlunos}
                     />
                 ))}
             </ScrollView>
